@@ -1,0 +1,21 @@
+Title: Senior Machine Learning Engineer
+Min Experience Years: 3
+
+Required Skills:
+- Python
+- PyTorch
+- MLOps
+
+Preferred Skills:
+- Kubernetes
+- Ray
+- Docker
+- FAISS
+
+Responsibilities:
+- Build and scale machine learning training and serving pipelines.
+- Train, fine-tune, and deploy deep learning models to production systems.
+- Own MLOps practices, including tracking experiments, model versioning, and continuous delivery.
+- Collaborate with software engineers to integrate models into high-throughput backend APIs.
+- Monitor serving infrastructure and optimize inference latency.
+- Mentor junior and mid-level machine learning engineers.
