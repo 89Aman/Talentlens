@@ -25,7 +25,7 @@ else:
 
 
 def call_gemini(prompt: str, system_prompt: str = "") -> str:
-    """Calls Gemini 1.5 Flash API."""
+    """Calls Gemini 3.5 Flash API with automatic fallback to 1.5 Flash on 429 quota limits."""
     if not settings.gemini_api_key:
         raise ValueError("GEMINI_API_KEY is missing.")
     
@@ -34,12 +34,27 @@ def call_gemini(prompt: str, system_prompt: str = "") -> str:
     
     try:
         model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",
+            model_name="gemini-3.5-flash",
             system_instruction=system_prompt if system_prompt else None
         )
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
+        err_str = str(e)
+        if "429" in err_str or "quota" in err_str.lower():
+            logger.warning("Gemini 3.5 Flash quota exceeded (429). Falling back to Gemini 1.5 Flash...")
+            try:
+                time.sleep(0.5)
+                model_fallback = genai.GenerativeModel(
+                    model_name="gemini-1.5-flash",
+                    system_instruction=system_prompt if system_prompt else None
+                )
+                response = model_fallback.generate_content(prompt)
+                return response.text
+            except Exception as fallback_error:
+                logger.error(f"Gemini fallback to 1.5 Flash failed: {fallback_error}")
+                raise fallback_error
+                
         logger.error(f"Gemini API call failed: {e}")
         raise e
 
@@ -47,14 +62,15 @@ def call_gemini(prompt: str, system_prompt: str = "") -> str:
 def call_groq(prompt: str, system_prompt: str = "", model_name: str = "llama-3.1-70b-versatile") -> str:
     """Calls Groq API with fallback models."""
     global groq_client
-    if not settings.groq_api_key:
-        # Check if we can fallback to Gemini
-        logger.warning("GROQ_API_KEY is missing, falling back to Gemini.")
+    # Treat placeholder values as missing
+    groq_key = settings.groq_api_key.strip()
+    if not groq_key or groq_key == "your_groq_api_key_here" or "placeholder" in groq_key.lower():
+        logger.warning("GROQ_API_KEY is missing or placeholder, falling back to Gemini.")
         full_prompt = f"System instruction: {system_prompt}\n\nUser request: {prompt}"
         return call_gemini(full_prompt)
         
     if not groq_client:
-        groq_client = Groq(api_key=settings.groq_api_key)
+        groq_client = Groq(api_key=groq_key)
         
     # Rate limit sleep (0.5s as per notes)
     time.sleep(0.5)
@@ -81,6 +97,14 @@ def call_groq(prompt: str, system_prompt: str = "", model_name: str = "llama-3.1
             )
             return chat_completion.choices[0].message.content
         except Exception as e:
+            err_str = str(e)
+            # Detect invalid API key immediately to bypass useless retry loops
+            if "invalid_api_key" in err_str.lower() or "401" in err_str:
+                logger.error("Groq API Key is invalid. Disabling Groq and failing over to Gemini.")
+                settings.groq_api_key = "" # clear so future calls skip Groq entirely
+                full_prompt = f"System instruction: {system_prompt}\n\nUser request: {prompt}"
+                return call_gemini(full_prompt)
+                
             logger.warning(f"Groq call failed for model {model}: {e}. Retrying next model...")
             last_error = e
             time.sleep(1.0)

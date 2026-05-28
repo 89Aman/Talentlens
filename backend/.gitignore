@@ -19,3 +19,6 @@ ENV/
 # Local outputs
 outputs/*
 !outputs/.gitkeep
+
+# IDE Settings
+.vscode/

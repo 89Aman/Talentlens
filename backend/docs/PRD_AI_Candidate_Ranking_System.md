@@ -152,7 +152,7 @@ Candidate CSV/PDF ──► Structured Extraction ──► Hard Filter ──�
 |-------------|--------|
 | Cost | $0 (all free tiers) |
 | Latency (full pipeline, 100 candidates) | < 3 minutes |
-| LLM Provider | Gemini 1.5 Flash + Groq (fallback) |
+| LLM Provider | Gemini 3.5 Flash + Groq (fallback) |
 | Embeddings | Local (sentence-transformers) |
 | Offline capability | Layers 3 partial (embeddings local) |
 | Demo readiness | Streamlit UI, works on localhost |
@@ -164,7 +164,7 @@ Candidate CSV/PDF ──► Structured Extraction ──► Hard Filter ──�
 | Component | Technology | Why |
 |-----------|-----------|-----|
 | Language | Python 3.11+ | Ecosystem, speed of dev |
-| LLM - Quality tasks | Gemini 1.5 Flash (free) | 1M tokens/day, fast |
+| LLM - Quality tasks | Gemini 3.5 Flash (free) | 1M tokens/day, fast |
 | LLM - Volume tasks | Groq + LLaMA 3.1 70B (free) | 14k req/day, ultra-fast |
 | Embeddings | sentence-transformers (local) | Free, no API needed |
 | Vector Search | FAISS (local) | Fast, no server needed |
