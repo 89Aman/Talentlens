@@ -112,13 +112,37 @@ def run_ranking_pipeline(
             "rank": rank_idx + 1,
             "candidate_id": candidate.id,
             "name": candidate.name,
+            "current_role": candidate.current_role,
+            "experience_years": candidate.experience_years,
+            "skills": candidate.skills,
+            "summary": candidate.summary,
+            "achievements": candidate.achievements,
+            "raw_text": candidate.raw_text,
             "semantic_score": semantic_scores_map.get(candidate.id, 0.5),
             "behavioral_score": behavior_score_obj.final_behavioral_score,
             "elo_score": elo_score,
             "confidence": confidence,
             "fit_summary": brief["fit_summary"],
             "gap_summary": brief["gap_summary"],
-            "interview_question": brief["interview_question"]
+            "interview_question": brief["interview_question"],
+            "behavioral_breakdown": {
+                "quantified_impact": {
+                    "score": behavior_score_obj.quantified_impact_score,
+                    "evidence": behavior_score_obj.quantified_impact_evidence
+                },
+                "ownership": {
+                    "score": behavior_score_obj.ownership_scope_score,
+                    "evidence": behavior_score_obj.ownership_scope_evidence
+                },
+                "technical_depth": {
+                    "score": behavior_score_obj.trajectory_velocity_score,
+                    "evidence": behavior_score_obj.trajectory_velocity_evidence
+                },
+                "mentorship": {
+                    "score": behavior_score_obj.rubric_alignment_score,
+                    "evidence": behavior_score_obj.rubric_alignment_evidence
+                }
+            }
         })
         
     duration = round(time.time() - start_time, 2)

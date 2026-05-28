@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 interface HomeViewProps {
-  onRun: (jobDescription: string, poolSize: number, enableGithub: boolean) => void;
+  onRun: (jobDescription: string, poolSize: number, enableGithub: boolean, candidateFile: string) => void;
 }
 
 export default function HomeView({ onRun }: HomeViewProps) {
@@ -32,7 +32,7 @@ export default function HomeView({ onRun }: HomeViewProps) {
   ];
 
   const handleRun = () => {
-    onRun(jobDescription, shortlistSize, githubSignals);
+    onRun(jobDescription, shortlistSize, githubSignals, candidateFile);
   };
 
   return (
