@@ -99,7 +99,7 @@ export default function App() {
 
   // Handler for triggering TalentLens AI Ranking evaluation with actual FastAPI integration
   const handleTriggerAnalysis = async (
-    jobDescription: string = "Lead Software Engineer focusing on high-scale recommendation engines, backend microservices, and reliable distributed systems. Must have strong evidence of microservices architecture migations, MLOps orchestration (Kubernetes or Kubeflow), or custom consensus protocol implementation (Raft or Paxos).",
+    jobDescription: string = "Lead Software Engineer focusing on high-scale recommendation engines, backend microservices, and reliable distributed systems. Must have strong evidence of microservices architecture migrations, MLOps orchestration (Kubernetes or Kubeflow), or custom consensus protocol implementation (Raft or Paxos).",
     shortlistSize: number = 15,
     githubSignals: boolean = true,
     candidateFile: string = "recommendation_engine_pool.csv"

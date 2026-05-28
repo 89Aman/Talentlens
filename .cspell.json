@@ -1,0 +1,31 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "notif",
+    "Kubeflow",
+    "lockscreen",
+    "ntvs",
+    "njsproj",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "faiss",
+    "pdfplumber",
+    "generativeai",
+    "groq",
+    "pytest",
+    "httpx",
+    "numpy",
+    "explainability",
+    "Keras",
+    "CIFAR",
+    "convolutional",
+    "Scikit"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "venv/**"
+  ]
+}

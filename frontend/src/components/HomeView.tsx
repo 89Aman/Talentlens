@@ -19,7 +19,7 @@ interface HomeViewProps {
 export default function HomeView({ onRun }: HomeViewProps) {
   const [activeTab, setActiveTab] = useState<"paste" | "upload">("paste");
   const [jobDescription, setJobDescription] = useState(
-    "Lead Software Engineer focusing on high-scale recommendation engines, backend microservices, and reliable distributed systems. Must have strong evidence of microservices architecture migations, MLOps orchestration (Kubernetes or Kubeflow), or custom consensus protocol implementation (Raft or Paxos)."
+    "Lead Software Engineer focusing on high-scale recommendation engines, backend microservices, and reliable distributed systems. Must have strong evidence of microservices architecture migrations, MLOps orchestration (Kubernetes or Kubeflow), or custom consensus protocol implementation (Raft or Paxos)."
   );
   const [shortlistSize, setShortlistSize] = useState(15);
   const [githubSignals, setGithubSignals] = useState(true);
