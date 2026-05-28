@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+pydantic>=2.0.0
+pydantic-settings
+sentence-transformers
+faiss-cpu
+pandas
+pdfplumber
+streamlit
+python-dotenv
+google-generativeai
+groq
+pytest
+requests
+httpx
+numpy
+python-multipart
