@@ -3,14 +3,14 @@ JD_EXTRACTION_SYSTEM = "You are an expert job description analyst. Extract struc
 
 JD_EXTRACTION_USER = """Extract the following from this job description and return as JSON:
 
-{
+{{
   "title": "string",
   "required_skills": ["list of must-have skills"],
   "preferred_skills": ["list of nice-to-have skills"],
   "min_experience_years": integer,
   "responsibilities": ["list of key responsibilities"],
   "culture_signals": ["team culture or value signals if any"]
-}
+}}
 
 Job Description:
 {jd_text}
@@ -22,16 +22,16 @@ RUBRIC_GENERATION_SYSTEM = "You are an expert technical recruiter. Given a job d
 RUBRIC_GENERATION_USER = """Based on this job description, generate an evaluation rubric for ranking candidates.
 
 Return exactly this JSON structure:
-{
+{{
   "dimensions": [
-    {
+    {{
       "name": "dimension name",
       "weight": 0.25,
       "description": "what this dimension measures",
       "scoring_guide": "what strong vs weak evidence looks like"
-    }
+    }}
   ]
-}
+}}
 
 Rules:
 - Generate 4 to 6 dimensions
@@ -53,7 +53,7 @@ BEHAVIORAL_SCORING_USER = """Evaluate this candidate profile for behavioral sign
 Score each dimension from 0 to 100 and cite specific evidence from the text.
 
 Return this JSON structure:
-{
+{{
   "quantified_impact_score": integer,
   "quantified_impact_evidence": "quote or summary from profile",
   "ownership_scope_score": integer,
@@ -64,7 +64,7 @@ Return this JSON structure:
   "rubric_alignment_evidence": "which rubric dimensions they match",
   "final_behavioral_score": integer,
   "summary": "2 sentence summary of candidate signal strength"
-}
+}}
 
 Scoring guides:
 - quantified_impact: Does the candidate use numbers, percentages, scale, revenue?
@@ -85,12 +85,12 @@ PAIRWISE_COMPARISON_SYSTEM = "You are a senior technical hiring manager. Compare
 PAIRWISE_COMPARISON_USER = """Compare these two candidates for the following role and decide who is the stronger fit.
 
 Return this JSON structure:
-{
+{{
   "winner_id": "candidate_a or candidate_b",
   "rationale": "under 80 words explaining the decision",
   "deciding_dimension": "which rubric dimension decided this",
   "confidence": "High or Medium or Low"
-}
+}}
 
 Rules:
 - You must choose one winner, never tie
@@ -113,11 +113,11 @@ HIRING_BRIEF_SYSTEM = "You are an expert recruiter writing concise, evidence-bas
 HIRING_BRIEF_USER = """Generate a recruiter hiring brief for this candidate.
 
 Return this JSON structure:
-{
+{{
   "fit_summary": "1-2 sentences: why they fit this role with specific evidence",
   "gap_summary": "1 sentence: key gap or area to probe",
   "interview_question": "1 tailored question based on their specific background"
-}
+}}
 
 Rules:
 - Use specific evidence from the candidate profile
