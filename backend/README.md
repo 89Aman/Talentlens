@@ -74,38 +74,41 @@ The system evaluates candidates through a multi-stage pipeline designed to optim
 
 ```
 TalentLens/
-├── app/
-│   ├── config.py                 # Environment configurations & API settings
-│   ├── main.py                   # FastAPI backend implementation
-│   ├── schemas/                  # Pydantic validation schemas
-│   │   ├── candidate.py          # Candidate models
-│   │   ├── jd.py                 # Job Description models
-│   │   ├── rubric.py             # Evaluation rubric models
-│   │   └── ranking.py            # Ranking models & outputs
-│   ├── services/                 # Layer services
-│   │   ├── jd_parser.py          # Gemini-based JD parser
-│   │   ├── rubric_generator.py   # Layer 1: Dynamic rubric logic
-│   │   ├── hard_filter.py        # Layer 2: Deterministic filters
-│   │   ├── embedding_service.py  # Layer 3: Sentence-transformers & FAISS
-│   │   ├── behavioral_scorer.py  # Layer 4: Qualitative scoring
-│   │   ├── pairwise_ranker.py    # Layer 5: Match scheduling & Elo tournaments
-│   │   ├── confidence_engine.py  # Layer 6: Confidence computations
-│   │   └── brief_generator.py    # Layer 6: Brief & question generation
-│   ├── ui/
-│   │   └── streamlit_app.py      # Streamlit web interface
-│   └── utils/                    # Common utils (Elo mathematics, templates)
-├── data/                         # Sample datasets (sample_jd.txt, candidates.csv)
-├── docs/                         # Documentation (PRD, designs)
-├── tests/                        # Automated unit tests
-└── requirements.txt              # Project package dependencies
+├── backend/
+│   ├── app/                      # FastAPI core
+│   │   ├── config.py             # Environment configurations & API settings
+│   │   ├── main.py               # FastAPI backend implementation
+│   │   ├── schemas/              # Pydantic validation schemas
+│   │   │   ├── candidate.py      # Candidate models
+│   │   │   ├── jd.py             # Job Description models
+│   │   │   ├── rubric.py         # Evaluation rubric models
+│   │   │   └── ranking.py        # Ranking models & outputs
+│   │   ├── services/             # Layer services
+│   │   │   ├── jd_parser.py      # Gemini-based JD parser
+│   │   │   ├── rubric_generator.py # Layer 1: Dynamic rubric logic
+│   │   │   ├── hard_filter.py    # Layer 2: Deterministic filters
+│   │   │   ├── embedding_service.py # Layer 3: Sentence-transformers & FAISS
+│   │   │   ├── behavioral_scorer.py # Layer 4: Qualitative scoring
+│   │   │   ├── pairwise_ranker.py # Layer 5: Match scheduling & Elo tournaments
+│   │   │   ├── confidence_engine.py # Layer 6: Confidence computations
+│   │   │   └── brief_generator.py # Layer 6: Brief & question generation
+│   │   └── utils/                # Common utils (Elo mathematics, templates)
+│   ├── data/                     # Sample datasets (sample_jd.txt, candidates.csv)
+│   ├── docs/                     # Documentation (PRD, designs)
+│   ├── tests/                    # Automated unit tests
+│   └── requirements.txt          # Project package dependencies
+└── frontend/                     # React + Vite + TypeScript frontend
+    ├── src/                      # Source components and views
+    ├── package.json              # Frontend package definitions
+    └── vite.config.ts            # Vite configurations
 ```
 
 ---
 
 ## 3. Technology Stack
 
-*   **API Framework:** FastAPI
-*   **Web Dashboard:** Streamlit
+*   **API Framework:** FastAPI (Python)
+*   **Web Dashboard:** React, Vite, TypeScript, Tailwind CSS
 *   **Local Embeddings:** `sentence-transformers/all-MiniLM-L6-v2`
 *   **Vector Search:** FAISS (Facebook AI Similarity Search)
 *   **Data Validation:** Pydantic v2
@@ -117,7 +120,7 @@ TalentLens/
 ## 4. Setup & Running the Application
 
 ### 1. Environment Configuration
-Create a `.env` file at the root of the project:
+Create a `.env` file inside `backend/`:
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
 GROQ_API_KEY=your_groq_api_key_here
@@ -128,12 +131,15 @@ HOST=127.0.0.1
 ### 2. Start the Backend API
 Run the FastAPI backend server:
 ```bash
+cd backend
 uvicorn app.main:app --reload --port 8000
 ```
 
-### 3. Start the Streamlit Dashboard
+### 3. Start the React Frontend
 Open a separate terminal window and launch the user interface:
 ```bash
-streamlit run app/ui/streamlit_app.py
+cd frontend
+npm install
+npm run dev
 ```
-This will open the interface in your default web browser at `http://localhost:8501`.
+This will open the interface in your default web browser at `http://localhost:3000`.

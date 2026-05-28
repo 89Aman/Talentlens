@@ -6,7 +6,6 @@ sentence-transformers
 faiss-cpu
 pandas
 pdfplumber
-streamlit
 python-dotenv
 google-generativeai
 groq
