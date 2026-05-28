@@ -22,33 +22,15 @@ Traditional applicant tracking systems (ATS) are **broken**. They rely on crude 
 
 ## ⚙️ How It Works: The 5-Layer Evaluation Pipeline
 
-```
-                    ┌────────────────────────┐
-                    │ Job Description Input  │
-                    └───────────┬────────────┘
-                                │
-                                ▼
-                  Layer 1: Dynamic Rubric Gen
-                                │
-                                ▼
-                    ┌────────────────────────┐
-                    │ Candidate Profiles CSV │
-                    └───────────┬────────────┘
-                                │
-                                ▼
-                   Layer 2: Hard Filter (Rule)
-                                │
-                                ▼
-                   Layer 3: FAISS Vector Search
-                                │ (Top-50 Semantic Pool)
-                                ▼
-                   Layer 4: Behavioral Scorer
-                                │ (Top-20 Signal Profiles)
-                                ▼
-                   Layer 5: Pairwise Elo Match (LLaMA 3.1)
-                                │ (Top-10 Chess Leaderboard)
-                                ▼
-                   🎯 Shortlist Dossiers & Briefs
+```mermaid
+graph TD
+    A[Job Description Input] --> B[Layer 1: Dynamic Rubric Gen]
+    C[Candidate Profiles CSV] --> D[Layer 2: Hard Filter Rule]
+    B --> D
+    D --> E[Layer 3: FAISS Vector Search]
+    E -->|Top-50 Semantic Pool| F[Layer 4: Behavioral Scorer]
+    F -->|Top-20 Signal Profiles| G[Layer 5: Pairwise Elo Match LLaMA 3.1]
+    G -->|Top-10 Chess Leaderboard| H[🎯 Shortlist Dossiers & Briefs]
 ```
 
 ### 1. Dynamic Rubric Generation (Gemini 3.5 Flash)
