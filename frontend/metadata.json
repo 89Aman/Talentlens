@@ -1,0 +1,6 @@
+{
+  "name": "TalentLens",
+  "description": "AI Candidate Ranking Dashboard with evidence-backed behavioral analysis, customizable rubrics, and recruiter metrics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
