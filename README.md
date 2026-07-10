@@ -1,4 +1,4 @@
-# 🔭 TalentLens — Next-Gen AI Candidate Ranking Engine
+# TalentLens — Next-Gen AI Candidate Ranking Engine
 
 > **Winner-grade Hackathon Entry:** Reimagining recruitment using dynamic rubric calibration, local vector semantic search, and comparative LLM chess-tournament re-ranking.
 
@@ -9,7 +9,7 @@
 
 ---
 
-## 💡 The Problem & The Vision
+##  The Problem & The Vision
 
 Traditional applicant tracking systems (ATS) are **broken**. They rely on crude keyword matching, causing:
 * **Keyword Stuffing:** Unqualified candidates bypass screens by overloading resumes with buzzwords.
@@ -20,7 +20,7 @@ Traditional applicant tracking systems (ATS) are **broken**. They rely on crude 
 
 ---
 
-## ⚙️ How It Works: The 5-Layer Evaluation Pipeline
+##  How It Works: The 5-Layer Evaluation Pipeline
 
 ```mermaid
 graph TD
@@ -30,7 +30,7 @@ graph TD
     D --> E[Layer 3: FAISS Vector Search]
     E -->|Top-50 Semantic Pool| F[Layer 4: Behavioral Scorer]
     F -->|Top-20 Signal Profiles| G[Layer 5: Pairwise Elo Match LLaMA 3.1]
-    G -->|Top-10 Chess Leaderboard| H[🎯 Shortlist Dossiers & Briefs]
+    G -->|Top-10 Chess Leaderboard| H[ Shortlist Dossiers & Briefs]
 ```
 
 ### 1. Dynamic Rubric Generation (Gemini 3.5 Flash)
@@ -58,7 +58,7 @@ graph TD
 
 ---
 
-## 🎨 Premium User Interface & Telemetry
+##  Premium User Interface & Telemetry
 
 TalentLens features a **material-design dashboard UI** built from scratch to captivate at first glance:
 * **Glassmorphic Bento Grid:** Sleek visual components mapping live pipeline statistics.
@@ -68,7 +68,7 @@ TalentLens features a **material-design dashboard UI** built from scratch to cap
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 | Component | Technology |
 |---|---|
@@ -81,7 +81,7 @@ TalentLens features a **material-design dashboard UI** built from scratch to cap
 
 ---
 
-## 🚀 Quick Start — Running Locally
+##  Quick Start — Running Locally
 
 ### Prerequisites
 * Node.js (v18+)
@@ -124,8 +124,7 @@ npm run dev
 Open `http://localhost:3000` in your browser.
 
 ---
-
-## 🏆 Hackathon Demo Guide
+##  Hackathon Demo Guide
 
 1. **Lock Screen:** Unlock the dashboard using your recruiter name key.
 2. **Dashboard Setup:** Select a candidate pool CSV (e.g. `recommendation_engine_pool.csv`) and paste your custom Job Description requirements.
@@ -136,5 +135,5 @@ Open `http://localhost:3000` in your browser.
 
 ---
 
-## ⚖️ License
+##  License
 Licensed under the Apache-2.0 License.
